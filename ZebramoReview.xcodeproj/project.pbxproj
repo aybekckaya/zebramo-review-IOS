@@ -83,6 +83,10 @@
 		A3C04BEB1B5FAA110030FD13 /* JsonDataString.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3C04BE91B5FAA110030FD13 /* JsonDataString.plist */; };
 		A3C04BEE1B5FAACB0030FD13 /* DAL.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C04BED1B5FAACB0030FD13 /* DAL.m */; };
 		A3C04BEF1B5FAACB0030FD13 /* DAL.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C04BED1B5FAACB0030FD13 /* DAL.m */; };
+		A3C04BF21B5FB9360030FD13 /* ProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C04BF11B5FB9360030FD13 /* ProfileVC.m */; };
+		A3C04BF31B5FB9360030FD13 /* ProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C04BF11B5FB9360030FD13 /* ProfileVC.m */; };
+		A3C04BF61B5FC3290030FD13 /* UIColor+Convert.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C04BF51B5FC3290030FD13 /* UIColor+Convert.m */; };
+		A3C04BF71B5FC3290030FD13 /* UIColor+Convert.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C04BF51B5FC3290030FD13 /* UIColor+Convert.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -179,6 +183,10 @@
 		A3C04BE91B5FAA110030FD13 /* JsonDataString.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = JsonDataString.plist; sourceTree = "<group>"; };
 		A3C04BEC1B5FAACB0030FD13 /* DAL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAL.h; sourceTree = "<group>"; };
 		A3C04BED1B5FAACB0030FD13 /* DAL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAL.m; sourceTree = "<group>"; };
+		A3C04BF01B5FB9360030FD13 /* ProfileVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileVC.h; sourceTree = "<group>"; };
+		A3C04BF11B5FB9360030FD13 /* ProfileVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileVC.m; sourceTree = "<group>"; };
+		A3C04BF41B5FC3290030FD13 /* UIColor+Convert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Convert.h"; sourceTree = "<group>"; };
+		A3C04BF51B5FC3290030FD13 /* UIColor+Convert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Convert.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -268,6 +276,8 @@
 		A3C04B351B5F9ACE0030FD13 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				A3C04BF41B5FC3290030FD13 /* UIColor+Convert.h */,
+				A3C04BF51B5FC3290030FD13 /* UIColor+Convert.m */,
 				A3C04BEC1B5FAACB0030FD13 /* DAL.h */,
 				A3C04BED1B5FAACB0030FD13 /* DAL.m */,
 				A3C04BE41B5FA9DB0030FD13 /* Plist.h */,
@@ -398,6 +408,8 @@
 			children = (
 				A3C04BCB1B5F9C430030FD13 /* LoginVC.h */,
 				A3C04BCC1B5F9C430030FD13 /* LoginVC.m */,
+				A3C04BF01B5FB9360030FD13 /* ProfileVC.h */,
+				A3C04BF11B5FB9360030FD13 /* ProfileVC.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -523,6 +535,7 @@
 				A3C04B881B5F9B1C0030FD13 /* NSString+EPPZReachability.m in Sources */,
 				A3C04BCD1B5F9C430030FD13 /* LoginVC.m in Sources */,
 				A3C04BB51B5F9B390030FD13 /* SBJsonStreamWriterAccumulator.m in Sources */,
+				A3C04BF21B5FB9360030FD13 /* ProfileVC.m in Sources */,
 				A3C04B8A1B5F9B1C0030FD13 /* Reachability.m in Sources */,
 				A3C04BAB1B5F9B390030FD13 /* SBJsonStreamParserAccumulator.m in Sources */,
 				A3C04BBB1B5F9B390030FD13 /* TFJson.m in Sources */,
@@ -544,6 +557,7 @@
 				A3C04BAD1B5F9B390030FD13 /* SBJsonStreamParserAdapter.m in Sources */,
 				A3C04BC11B5F9B4C0030FD13 /* NSString+formInput.m in Sources */,
 				A3C04BA71B5F9B390030FD13 /* SBJsonParser.m in Sources */,
+				A3C04BF61B5FC3290030FD13 /* UIColor+Convert.m in Sources */,
 				A3C04BE61B5FA9DB0030FD13 /* Plist.m in Sources */,
 				A3C04B8E1B5F9B1C0030FD13 /* UIImageView+AFNetworking.m in Sources */,
 				A3C04B151B5F9AC40030FD13 /* AppDelegate.m in Sources */,
@@ -565,6 +579,7 @@
 				A3C04BC91B5F9B730030FD13 /* NSObject+KJSerializer.m in Sources */,
 				A3C04BCE1B5F9C430030FD13 /* LoginVC.m in Sources */,
 				A3C04B831B5F9B1C0030FD13 /* AFURLConnectionOperation.m in Sources */,
+				A3C04BF31B5FB9360030FD13 /* ProfileVC.m in Sources */,
 				A3C04BD31B5F9DD70030FD13 /* Story.m in Sources */,
 				A3C04BB21B5F9B390030FD13 /* SBJsonStreamTokeniser.m in Sources */,
 				A3C04B851B5F9B1C0030FD13 /* AFXMLRequestOperation.m in Sources */,
@@ -586,6 +601,7 @@
 				A3C04B811B5F9B1C0030FD13 /* AFPropertyListRequestOperation.m in Sources */,
 				A3C04BE31B5FA57E0030FD13 /* LoginTests.m in Sources */,
 				A3C04B8D1B5F9B1C0030FD13 /* TFNetwork.m in Sources */,
+				A3C04BF71B5FC3290030FD13 /* UIColor+Convert.m in Sources */,
 				A3C04BE71B5FA9DB0030FD13 /* Plist.m in Sources */,
 				A3C04BDB1B5F9FD00030FD13 /* MBProgressHUD.m in Sources */,
 				A3C04BBC1B5F9B390030FD13 /* TFJson.m in Sources */,

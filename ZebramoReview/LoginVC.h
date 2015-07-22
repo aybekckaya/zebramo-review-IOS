@@ -12,6 +12,9 @@
 #import "TFNetwork.h"
 #import "TFJson.h"
 #import "User.h"
+#import "Story.h"
+#import "ProfileVC.h"
+#import "DAL.h"
 
 /**
    Localized strings gerekli mi ?

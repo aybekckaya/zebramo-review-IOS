@@ -25,9 +25,31 @@
     
     // Login test
     
-   // [self loginWithMail:@"aybekcankaya@icloud.com" password:@"ackack123"];
+//    [self loginWithMail:@"aybekcankaya@icloud.com" password:@"ackack123"];
+   
+    // start from Profile Page
+    [self startFromProfilePage];
+}
+
+/**
+    @description : use this for testing
+ 
+ */
+-(void)startFromProfilePage
+{
+    DAL *oo =[[DAL alloc]initwithPlistName:@"JsonDataString"];
+    NSString *json= [oo ReadFromPlistWithKey:@"correctJSON"];
+    
+    NSDictionary *dctAll = [TFJson JsonToObject:json];
+    NSDictionary *dctUser = dctAll[@"user"];
+    User *user = [[User alloc]initWithDictionary:dctUser];
+    
+    ProfileVC *vc = [Story viewController:@"profileVC"];
+    vc.user = user;
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -198,7 +220,9 @@
     
     
     // next page
-       
+    ProfileVC *vc = [Story viewController:@"profileVC"];
+    vc.user = user;
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 
