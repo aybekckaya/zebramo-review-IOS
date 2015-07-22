@@ -13,6 +13,7 @@
 #import "UIColor+Convert.h"
 #import "NSString+formInput.h"
 #import "MBProgressHUD.h"
+#import "DAL.h"
 
 @interface ProfileVC : UIViewController<UIPickerViewDataSource , UIPickerViewDelegate , UITextFieldDelegate , UITextViewDelegate>
 {
@@ -28,6 +29,9 @@
     NSArray *undergarments;
     
     MBProgressHUD *CHUD;
+    
+    // use for testing ONLY
+    NSDictionary *jsonDct;
     
 }
 
