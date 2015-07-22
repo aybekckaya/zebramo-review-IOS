@@ -25,9 +25,9 @@
 
   //  [self testUIWithPresuppliedUserObject:self.user];
     
-  //  [self networkQueryForUserProfileInfoUserID:self.user.ID];
+    [self networkQueryForUserProfileInfoUserID:self.user.ID];
     
-    [self initializeTestData];
+   // [self initializeTestData];
     
     
 }
@@ -75,6 +75,15 @@
     self.twDescription.layer.borderColor =[[UIColor grayColor]CGColor];
     
     
+    self.tfOvergarments.delegate = self;
+    self.tfUndergarments.delegate = self;
+    self.tfShoeSize.delegate = self;
+    self.tfEmail.delegate = self;
+    
+    self.twDescription.delegate = self;
+    
+    
+    
     // hud
     CHUD = [[MBProgressHUD alloc]initWithView:self.view];
     [self.view addSubview:CHUD];
@@ -82,6 +91,8 @@
     
     
     // tap gestures
+    self.imViewProfile.userInteractionEnabled = YES;
+    
     UITapGestureRecognizer *recTapImage = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(profileImageDidTapped)];
     recTapImage.numberOfTapsRequired = 1;
     recTapImage.numberOfTouchesRequired = 1;
@@ -98,7 +109,53 @@
     [self.scrollContents addGestureRecognizer:recTapScroll];
     
     
+    // notifications
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+    
+    
+    
+  //  [self.view bringSubviewToFront:self.imViewProfile];
+    
 }
+
+#pragma mark KEYBOARD NOTIFICATIONS
+
+-(void)keyboardWillShow:(NSNotification *)notif
+{
+    NSDictionary *userInfo = notif.userInfo;
+    keyboardSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
+    self.scrollContents.contentInset = contentInsets;
+    self.scrollContents.scrollIndicatorInsets = contentInsets;
+    
+    
+    
+}
+
+
+-(void)keyboardWillHide:(NSNotification *)notif
+{
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        
+        self.scrollContents.contentOffset = CGPointMake(0, 0);
+        
+    } completion:^(BOOL finished) {
+        
+        UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, 0, 0.0);
+        self.scrollContents.contentInset = contentInsets;
+        self.scrollContents.scrollIndicatorInsets = contentInsets;
+        
+    }];
+}
+
 
 
 -(void)initializePickerViews
@@ -195,12 +252,79 @@
 }
 
 
+#pragma mark TAKE PHOTO
+
+-(void)openPhotoTakePage
+{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    
+    [self presentViewController:picker animated:YES completion:NULL];
+}
+
+-(void)openPhotoLibrary
+{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    [self presentViewController:picker animated:YES completion:NULL];
+}
+
+// image picker delegate
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    self.imViewProfile.image = chosenImage;
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+     [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+
 #pragma mark GESTURES 
 
 -(void)profileImageDidTapped
 {
-    // Show take photo
+    
+    UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"Zebramo" message:@"" delegate:self cancelButtonTitle:@"İptal" otherButtonTitles:@"Fotoğraf çek" , @"Resim seç", nil];
+    alert.tag = 1071;
+    [alert show];
+    
 }
+
+// alert Delegate
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(alertView.tag == 1071)
+    {
+        if(buttonIndex == 1)
+        {
+            // take photo
+            [self openPhotoTakePage];
+        }
+        else if( buttonIndex == 2)
+        {
+            // open library
+            [self openPhotoLibrary];
+        }
+        else if(buttonIndex == 2)
+        {
+            
+        }
+    }
+}
+
 
 
 -(void)showSurnameDidTapped
@@ -312,8 +436,37 @@
 }
 
 
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    
+    if([textField isEqual:self.tfEmail] || [textField isEqual:self.tfUndergarments] || [textField isEqual:self.tfShoeSize] )
+    {
+        [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            
+            self.scrollContents.contentOffset = CGPointMake(0, 140);
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
+    
+   
+}
+
+
+
 #pragma mark TEXTVIEW DELEGATES
 
+-(void)textViewDidBeginEditing:(UITextView *)textView
+{
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        
+        self.scrollContents.contentOffset = CGPointMake(0, 240);
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+}
 
 
 
@@ -336,6 +489,9 @@
     
      __weak typeof(self) weakSelf = self;
     [network jsonQueryWithBlock:query success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        
+        jsonDct = JSON;
+        [weakSelf autoFillInputAreas];
         
         [CHUD hide:YES];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
@@ -368,8 +524,15 @@
 }
 */
 
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (IBAction)saveOnTap:(id)sender
 {
-    
+        
 }
+
 @end

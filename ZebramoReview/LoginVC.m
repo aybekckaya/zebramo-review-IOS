@@ -25,10 +25,10 @@
     
     // Login test
     
-//    [self loginWithMail:@"aybekcankaya@icloud.com" password:@"ackack123"];
+ [self loginWithMail:@"aybekcankaya@icloud.com" password:@"ackack123"];
    
     // start from Profile Page
-    [self startFromProfilePage];
+   // [self startFromProfilePage];
 }
 
 /**

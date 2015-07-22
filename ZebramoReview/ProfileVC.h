@@ -15,7 +15,7 @@
 #import "MBProgressHUD.h"
 #import "DAL.h"
 
-@interface ProfileVC : UIViewController<UIPickerViewDataSource , UIPickerViewDelegate , UITextFieldDelegate , UITextViewDelegate>
+@interface ProfileVC : UIViewController<UIPickerViewDataSource , UIPickerViewDelegate , UITextFieldDelegate , UITextViewDelegate , UIAlertViewDelegate , UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 {
     NSArray *arrColorsForShowSurname;
     
@@ -32,6 +32,10 @@
     
     // use for testing ONLY
     NSDictionary *jsonDct;
+    
+    // determine scrollView Content offset
+    CGSize keyboardSize ;
+    //CGPoint activePoint;
     
 }
 
