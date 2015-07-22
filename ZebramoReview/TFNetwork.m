@@ -201,6 +201,72 @@ typedef void (^ TimeOutBlock)(NSURLRequest *, id , float);
 
 }
 
+
+
+-(void) putQueryWithBlock:(NSString *)url putDictionary:(NSDictionary *)postDct success:(void (^)(NSString *theUrlStr, NSHTTPURLResponse *response, NSString * JSONString))success
+                  failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON))failure timeOut:(void (^)(NSURLRequest *request, id JSON, float timeOutSeconds))timeOut reachabilityError:(void (^)(NSURLRequest *request, id JSON, float timeOutSeconds,NSError *err))reachabilityError;
+{
+    
+    //   url = [url urlEncodeUsingEncoding:NSUTF8StringEncoding];
+    // split string
+    NSArray *splitURL=[url componentsSeparatedByString:@"/"];
+    
+    NSString *baseURLOnQuery=@"";
+    NSString *extensionURLOnQuery;
+    
+    for(int i=0 ; i< splitURL.count-1 ; i++)
+    {
+        baseURLOnQuery=[NSString stringWithFormat:@"%@/%@",baseURLOnQuery,splitURL[i]];
+    }
+    baseURLOnQuery=[baseURLOnQuery substringWithRange:NSMakeRange(1, baseURLOnQuery.length-1)];
+    baseURLOnQuery=[NSString stringWithFormat:@"%@/",baseURLOnQuery];
+    baseURLOnQuery=[baseURLOnQuery stringByReplacingOccurrencesOfString:@" " withString:@""];
+    extensionURLOnQuery = splitURL[splitURL.count-1];
+    
+    NSDictionary *params = postDct;
+    
+    [Reachability reachabilityWithBlock:^(BOOL isReachable) {
+        
+        if(isReachable == YES)
+        {
+            //**reachable**
+            AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:
+                                    [NSURL URLWithString:baseURLOnQuery]];
+            
+            
+            
+            
+            
+            [client putPath:extensionURLOnQuery parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                
+                // ** success **
+                NSString *jsonStr = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
+                success (url,responseObject,jsonStr);
+                
+                
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                
+                // ** failure **
+                
+                failure(nil,nil,error,nil);
+                
+            }];
+        }
+        else
+        {
+            //** unreachable **
+            reachabilityError(nil,nil,TIME_OUT,nil);
+        }
+        
+    }];
+    
+    
+}
+
+
+
+
+
 - (void)timeOutSelector:(NSTimer *)timer
 {
     NSDictionary *userDct = [timer userInfo];

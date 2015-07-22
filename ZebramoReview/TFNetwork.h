@@ -34,6 +34,10 @@
                    failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON))failure timeOut:(void (^)(NSURLRequest *request, id JSON, float timeOutSeconds))timeOut reachabilityError:(void (^)(NSURLRequest *request, id JSON, float timeOutSeconds,NSError *err))reachabilityError;
 
 
+-(void) putQueryWithBlock:(NSString *)url putDictionary:(NSDictionary *)postDct success:(void (^)(NSString *theUrlStr, NSHTTPURLResponse *response, NSString * JSONString))success
+                   failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON))failure timeOut:(void (^)(NSURLRequest *request, id JSON, float timeOutSeconds))timeOut reachabilityError:(void (^)(NSURLRequest *request, id JSON, float timeOutSeconds,NSError *err))reachabilityError;
+
+
 
 -(void)setNewTimeOutValue: (float) time_outNew;
 
