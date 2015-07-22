@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>correctJSON</key>
+	<string>{&quot;meta&quot;:{&quot;code&quot;:200,&quot;server&quot;:&quot;development.zebramo.com&quot;},&quot;notifications&quot;:{&quot;user_news_count&quot;:0,&quot;status&quot;:&quot;success&quot;,&quot;message&quot;:&quot;Login succeeded.&quot;},&quot;user&quot;:{&quot;id&quot;:3049640,&quot;status&quot;:&quot;active&quot;,&quot;created&quot;:&quot;2015-07-22 12:16:21 +0300&quot;,&quot;forename&quot;:&quot;aybek can&quot;,&quot;surname&quot;:&quot;kaya&quot;,&quot;email&quot;:&quot;aybekcankaya@icloud.com&quot;,&quot;image&quot;:null,&quot;description&quot;:null,&quot;birthday&quot;:null,&quot;country&quot;:null,&quot;nationality&quot;:null,&quot;city&quot;:null,&quot;last_login&quot;:&quot;2015-07-22T13:33:21&quot;,&quot;last_activity&quot;:null,&quot;followers&quot;:0,&quot;following&quot;:0,&quot;products&quot;:0,&quot;username&quot;:&quot;aybek can kaya&quot;,&quot;display_surname&quot;:true,&quot;followed_by_me&quot;:false,&quot;is_authenticated&quot;:false,&quot;is_super_user&quot;:false,&quot;is_fb_user&quot;:false,&quot;on_vacation&quot;:false,&quot;overgarments&quot;:null,&quot;undergarments&quot;:null,&quot;shoe_size&quot;:null,&quot;seller_rating&quot;:{&quot;poor&quot;:0,&quot;good&quot;:0,&quot;great&quot;:0},&quot;purchaser_rating&quot;:{&quot;poor&quot;:0,&quot;good&quot;:0,&quot;great&quot;:0}}}</string>
+</dict>
+</plist>
