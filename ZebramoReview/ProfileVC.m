@@ -586,7 +586,7 @@
     [dctMute setObject:self.tfShoeSize.text forKey:@"shoe_size"];
       [dctMute setObject:self.tfOvergarments.text forKey:@"overgarments"];
     [dctMute setObject:self.tfUndergarments.text forKey:@"undergarments"];
-    [dctMute setObject:@(self.user.displaySurname) forKey:@"display_surname"];
+    [dctMute setObject:[NSString stringWithFormat:@"%d" , self.user.displaySurname] forKey:@"display_surname"];
     [dctMute setObject:self.twDescription.text forKey:@"description"];
     
     
@@ -595,28 +595,85 @@
         UIImage *image = self.imViewProfile.image;
          // [dctMute setObject:image forKey:@"image"];
         
-        NSData *imageData = UIImageJPEGRepresentation(image, 0.35F);
         
-            NSString *query = [NSString stringWithFormat:@"https://development.zebramo.com/users/%d/profile", self.user.ID];
+        NSString *fileName = @"imageUser.jpg";
+      
+        NSString *query = [NSString stringWithFormat:@"https://development.zebramo.com/users/%d/profile", self.user.ID];
         
         NSString *suffix = [NSString stringWithFormat:@"/users/%d/profile" , self.user.ID];
         
-        AFHTTPClient *httpClient = [[AFHTTPClient alloc]
-                                    initWithBaseURL:[NSURL URLWithString:@"https://development.zebramo.com/"]];
-        NSMutableURLRequest *request = [httpClient
-                                        requestWithMethod:@"PUT" path:suffix parameters:nil];
-        [request setHTTPBody:imageData];
-        [request setValue:@"image/jpeg" forHTTPHeaderField:@"Content-Type"];
         
-        AFHTTPRequestOperation *operation = [httpClient
-                                             HTTPRequestOperationWithRequest:request
-                                             success:^(AFHTTPRequestOperation *op, NSHTTPURLResponse *response) {
-                                                 NSLog(@"%@", response);
-                                             }
-                                             failure:^(AFHTTPRequestOperation *op, NSError *error) {
-                                                 NSLog(@"%@", error);
-                                             }];
+        
+        AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL: [NSURL URLWithString:@"https://development.zebramo.com/"]];
+        client.parameterEncoding = AFJSONParameterEncoding;
+        
+        NSMutableURLRequest *request = [client multipartFormRequestWithMethod:@"PUT" path:suffix parameters:nil constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
+            
+            NSArray *keys = [dctMute allKeys];
+             for(NSString *theKey in keys)
+             {
+                 NSString *value = dctMute[theKey];
+                 [formData appendPartWithFormData:[value dataUsingEncoding:NSUTF8StringEncoding] name:theKey];
+             }
+            
+            NSData *imageData = UIImageJPEGRepresentation(image, 0.35f);
+            [formData appendPartWithFileData:imageData
+                                        name:@"image"
+                                    fileName:@"imageUser.jpg"
+                                    mimeType:@"image/jpeg"];
+            
+            
+        }];
+        
+            
+       AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+        
+        
+        [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Zebramo" message:@"Bilgileriniz kaydedilmiştir." delegate:self cancelButtonTitle:@"Tamam" otherButtonTitles: nil];
+            [alert show];
+                 [CHUD hide:YES];
+            
+             }
+                                         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                             NSLog(@"failure");
+                                              [CHUD hide:YES];
+                                         }];
         [operation start];
+        
+        
+        
+    }
+    else
+    {
+        
+        NSDictionary *dctPutSample = [[NSDictionary alloc]initWithDictionary:dctMute];
+        
+        TFNetwork *network = [[TFNetwork alloc]init];
+        
+        NSString *query = [NSString stringWithFormat:@"https://development.zebramo.com/users/%d/profile", self.user.ID];
+        
+        [network putQueryWithBlock:query putDictionary:dctPutSample success:^(NSString *theUrlStr, NSHTTPURLResponse *response, NSString *JSONString) {
+            
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Zebramo" message:@"Bilgileriniz kaydedilmiştir." delegate:self cancelButtonTitle:@"Tamam" otherButtonTitles: nil];
+            [alert show];
+            
+            
+            [CHUD hide:YES];
+            
+        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+            
+            [CHUD hide:YES];
+        } timeOut:^(NSURLRequest *request, id JSON, float timeOutSeconds) {
+            
+            [CHUD hide:YES];
+        } reachabilityError:^(NSURLRequest *request, id JSON, float timeOutSeconds, NSError *err) {
+            
+            [CHUD hide:YES];
+        }];
+
         
         
         
@@ -625,30 +682,6 @@
     
     
     
-    NSDictionary *dctPutSample = [[NSDictionary alloc]initWithDictionary:dctMute];
-    
-    TFNetwork *network = [[TFNetwork alloc]init];
-    
-    NSString *query = [NSString stringWithFormat:@"https://development.zebramo.com/users/%d/profile", self.user.ID];
-    
-    [network putQueryWithBlock:query putDictionary:dctPutSample success:^(NSString *theUrlStr, NSHTTPURLResponse *response, NSString *JSONString) {
-        
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Zebramo" message:@"Bilgileriniz kaydedilmiştir." delegate:self cancelButtonTitle:@"Tamam" otherButtonTitles: nil];
-        [alert show];
-        
-        
-          [CHUD hide:YES];
-        
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        
-          [CHUD hide:YES];
-    } timeOut:^(NSURLRequest *request, id JSON, float timeOutSeconds) {
-        
-          [CHUD hide:YES];
-    } reachabilityError:^(NSURLRequest *request, id JSON, float timeOutSeconds, NSError *err) {
-        
-          [CHUD hide:YES];
-    }];
     
     
 }
