@@ -25,7 +25,7 @@
     
     // Login test
     
-// [self loginWithMail:@"ack@gmail.com" password:@"ackack123"];
+ [self loginWithMail:@"ack@gmail.com" password:@"ackack123"];
    
     // start from Profile Page
    // [self startFromProfilePage];

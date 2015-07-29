@@ -605,7 +605,7 @@
         
         
         AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL: [NSURL URLWithString:@"https://development.zebramo.com/"]];
-        client.parameterEncoding = AFJSONParameterEncoding;
+        //client.parameterEncoding = AFJSONParameterEncoding;
         
         NSMutableURLRequest *request = [client multipartFormRequestWithMethod:@"PUT" path:suffix parameters:nil constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
             
