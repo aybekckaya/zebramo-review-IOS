@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A36FA2A11B68EE46009F3A65 /* foto.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A36FA2A01B68EE46009F3A65 /* foto.jpg */; };
 		A3C04B121B5F9AC40030FD13 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C04B111B5F9AC40030FD13 /* main.m */; };
 		A3C04B151B5F9AC40030FD13 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C04B141B5F9AC40030FD13 /* AppDelegate.m */; };
 		A3C04B1B1B5F9AC40030FD13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3C04B191B5F9AC40030FD13 /* Main.storyboard */; };
@@ -100,6 +101,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A36FA2A01B68EE46009F3A65 /* foto.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = foto.jpg; sourceTree = "<group>"; };
 		A3C04B0C1B5F9AC40030FD13 /* ZebramoReview.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZebramoReview.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3C04B101B5F9AC40030FD13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A3C04B111B5F9AC40030FD13 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 		A3C04B031B5F9AC40030FD13 = {
 			isa = PBXGroup;
 			children = (
+				A36FA2A01B68EE46009F3A65 /* foto.jpg */,
 				A3C04BE01B5FA37B0030FD13 /* SystemConfiguration.framework */,
 				A3C04BD41B5F9EE60030FD13 /* New Group */,
 				A3C04B281B5F9AC40030FD13 /* ZebramoReviewTests */,
@@ -512,6 +515,7 @@
 				A3C04B1B1B5F9AC40030FD13 /* Main.storyboard in Resources */,
 				A3C04BEA1B5FAA110030FD13 /* JsonDataString.plist in Resources */,
 				A3C04B201B5F9AC40030FD13 /* LaunchScreen.xib in Resources */,
+				A36FA2A11B68EE46009F3A65 /* foto.jpg in Resources */,
 				A3C04B1D1B5F9AC40030FD13 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -806,6 +810,7 @@
 				A3C04B311B5F9AC40030FD13 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A3C04B321B5F9AC40030FD13 /* Build configuration list for PBXNativeTarget "ZebramoReviewTests" */ = {
 			isa = XCConfigurationList;
@@ -814,6 +819,7 @@
 				A3C04B341B5F9AC40030FD13 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -212,10 +212,21 @@
    
     
     //NSString *imageURL = self.user.imageURL;
+    
     if(![self.user.imageURL isKindOfClass:[NSNull class]])
     {
-        NSString *url = self.user.imageURL;
-        [self.imViewProfile setImageWithURL:[NSURL URLWithString:url]];
+        NSDictionary *dctImage = self.user.imageURL;
+      //  NSString *url = self.user.imageURL;
+       // [self.imViewProfile setImageWithURL:[NSURL URLWithString:url]];
+        
+        NSString *urlStr = dctImage[@"url_template"];
+        
+        //${resolution}
+        
+        urlStr = [urlStr stringByReplacingOccurrencesOfString:@"_${resolution}" withString:@""];
+        
+        [self.imViewProfile setImageWithURL:[NSURL URLWithString:urlStr]];
+        
     }
     
     if(![self.user.overgarments isKindOfClass:[NSNull class]])
@@ -590,31 +601,34 @@
     [dctMute setObject:self.twDescription.text forKey:@"description"];
     
     
-    if(self.imViewProfile.image != nil)
+    
+    UIImage *imageSent = self.imViewProfile.image;
+    //imageSent = [UIImage imageNamed:@"foto.jpg"];
+    
+    if(imageSent != nil)
     {
-        UIImage *image = self.imViewProfile.image;
+        UIImage *image = imageSent;
          // [dctMute setObject:image forKey:@"image"];
         
+        // PUT /users/{userId}/image
         
         NSString *fileName = @"imageUser.jpg";
       
         NSString *query = [NSString stringWithFormat:@"https://development.zebramo.com/users/%d/profile", self.user.ID];
         
-        NSString *suffix = [NSString stringWithFormat:@"/users/%d/profile" , self.user.ID];
+        NSString *suffix = [NSString stringWithFormat:@"/users/%d/image" , self.user.ID];
         
         
         
         AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL: [NSURL URLWithString:@"https://development.zebramo.com/"]];
         //client.parameterEncoding = AFJSONParameterEncoding;
         
+        
+        
         NSMutableURLRequest *request = [client multipartFormRequestWithMethod:@"PUT" path:suffix parameters:nil constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
             
-            NSArray *keys = [dctMute allKeys];
-             for(NSString *theKey in keys)
-             {
-                 NSString *value = dctMute[theKey];
-                 [formData appendPartWithFormData:[value dataUsingEncoding:NSUTF8StringEncoding] name:theKey];
-             }
+            NSString *userID_str = [NSString stringWithFormat:@"%d" , self.user.ID];
+            [formData appendPartWithFormData:[userID_str dataUsingEncoding:NSUTF8StringEncoding] name:@"userId"];
             
             NSData *imageData = UIImageJPEGRepresentation(image, 0.35f);
             [formData appendPartWithFileData:imageData
@@ -632,8 +646,7 @@
         [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             
             
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Zebramo" message:@"Bilgileriniz kaydedilmiştir." delegate:self cancelButtonTitle:@"Tamam" otherButtonTitles: nil];
-            [alert show];
+           
                  [CHUD hide:YES];
             
              }
@@ -646,8 +659,7 @@
         
         
     }
-    else
-    {
+   
         
         NSDictionary *dctPutSample = [[NSDictionary alloc]initWithDictionary:dctMute];
         
@@ -677,7 +689,7 @@
         
         
         
-    }
+    
     
     
     
